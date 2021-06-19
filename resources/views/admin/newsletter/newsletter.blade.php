@@ -12,7 +12,7 @@
 
        <div class="card pd-20 pd-sm-40">
          <h6 class="card-body-title">Subscriber List
-             <a href="" class="btn btn-sm btn-warning" style="float: right" data-toggle="modal" data-target="#modaldemo3">Add New</a>
+             <a href="" class="btn btn-sm btn-warning" style="float: right" data-toggle="modal" data-target="#modaldemo3">Delete All</a>
          </h6>
          
          <div class="table-wrapper">
@@ -28,11 +28,11 @@
              <tbody>
                  @foreach($newsletters as $newsletter)
                <tr> 
-                 <td>{{$newsletter->id}}</td>
+                 <td><input type="checkbox"> {{$newsletter->id}}</td>
                  <td>{{$newsletter->email}}</td>
-                 <th>{{$newsletter->created_at}}</th>
+                 <th>{{\Carbon\Carbon::parse($newsletter->created_at)->diffForhumans()}}</th>
                  <td>
-                     <a href="{{URL::to('delete/category/'.$newsletter->id)}}" class="btn btn-sm btn-danger" id="delete">Delete</a>
+                     <a href="{{URL::to('delete/newsletter/'.$newsletter->id)}}" class="btn btn-sm btn-danger" id="delete">Delete</a>
                  </td>
                </tr>
                @endforeach

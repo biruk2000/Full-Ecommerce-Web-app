@@ -18,4 +18,15 @@ class NewsletterController extends Controller
         $newsletters = DB::table('newsletters')->get();
         return view('admin.newsletter.newsletter', compact('newsletters'));
     }
+
+    public function deleteNewsletter($id)   
+    {
+         DB::table('newsletters')->where('id', $id)->delete();
+         $notification=array(
+            'messege'=>'Subscriber Deleted Successfully',
+            'alert-type'=>'success'
+             );
+           return Redirect()->back()->with($notification);
+
+    }
 }

@@ -59,7 +59,7 @@ Route::post('update/coupon/{id}', 'Admin\Category\CouponController@updateCoupon'
 // Newsletters
 
 Route::get('admin/newsletters', 'Admin\Category\NewsletterController@newsletter')->name('admin.newsletter');
-
+Route::get('delete/newsletter/{id}', 'Admin\Category\NewsletterController@deleteNewsletter');
 // Frontend All Routes
 
 Route::post('store/newsletter', 'FrontController@storeNewsletter')->name('store.newsletter');
