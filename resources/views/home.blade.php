@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
 <!-- content wrpper -->
 <div class="content_wrapper">

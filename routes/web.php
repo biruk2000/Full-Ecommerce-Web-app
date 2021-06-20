@@ -60,6 +60,14 @@ Route::post('update/coupon/{id}', 'Admin\Category\CouponController@updateCoupon'
 
 Route::get('admin/newsletters', 'Admin\Category\NewsletterController@newsletter')->name('admin.newsletter');
 Route::get('delete/newsletter/{id}', 'Admin\Category\NewsletterController@deleteNewsletter');
+
+
+// Product All Routes
+Route::get('admin/product/all', 'Admin\Product\ProductController@index')->name('all.product');
+Route::get('admin/product/add', 'Admin\Product\ProductController@addProduct')->name('add.product');
+
+
+
 // Frontend All Routes
 
 Route::post('store/newsletter', 'FrontController@storeNewsletter')->name('store.newsletter');

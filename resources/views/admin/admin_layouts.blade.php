@@ -30,6 +30,7 @@
 
     <title>Ecommerce Site Admin Panel</title>
 
+    @yield('css')
     <!-- vendor css -->
     <link href="{{ asset('backend/lib/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
     <link href="{{ asset('backend/lib/Ionicons/css/ionicons.css')}}" rel="stylesheet">
@@ -43,10 +44,10 @@
     <link href="{{asset('backend/lib/select2/css/select2.min.css')}}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
-  
-
+    
     <!-- Starlight CSS -->
     <link rel="stylesheet" href="{{ asset('backend/css/starlight.css')}}">
+    <link href="{{asset('backend/lib/summernote/summernote-bs4.css')}}" rel="stylesheet">
   </head>
 
   <body>
@@ -111,8 +112,8 @@
           </div><!-- menu-item -->
         </a><!-- sl-menu-link -->
         <ul class="sl-menu-sub nav flex-column">
-          <li class="nav-item"><a href="table-basic.html" class="nav-link">Add Product</a></li>
-          <li class="nav-item"><a href="table-datatable.html" class="nav-link">All Products</a></li>
+          <li class="nav-item"><a href="{{route('add.product')}}" class="nav-link">Add Products</a></li>
+          <li class="nav-item"><a href="{{route('all.product')}}" class="nav-link">All Product</a></li>
         </ul>      
         <a href="#" class="sl-menu-link">
           <div class="sl-menu-item">
@@ -331,6 +332,7 @@
     <script src="{{asset('backend/lib/jquery-ui/jquery-ui.js')}}"></script>
     <script src="{{asset('backend/lib/perfect-scrollbar/js/perfect-scrollbar.jquery.js')}}"></script>
 
+    @yield('js')
 
      <!-- data table-->
      <script src="{{asset('backend/lib/highlightjs/highlight.pack.js')}}"></script>
@@ -371,6 +373,25 @@
     <script src="{{asset('backend/lib/Flot/jquery.flot.pie.js')}}"></script>
     <script src="{{asset('backend/lib/Flot/jquery.flot.resize.js')}}"></script>
     <script src="{{asset('backend/lib/flot-spline/jquery.flot.spline.js')}}"></script>
+    
+    <script src="{{asset('backend/lib/medium-editor/medium-editor.js')}}"></script>
+    <script src="{{asset('backend/lib/summernote/summernote-bs4.min.js')}}"></script>
+  
+
+    <script>
+      $(function(){
+        'use strict';
+
+        // Inline editor
+        var editor = new MediumEditor('.editable');
+
+        // Summernote editor
+        $('#summernote').summernote({
+          height: 150,
+          tooltip: false
+        })
+      });
+    </script>
 
     <script src="{{asset('backend/js/starlight.js')}}"></script>
     <script src="{{asset('backend/js/ResizeSensor.js')}}"></script>
