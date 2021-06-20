@@ -16,9 +16,12 @@
 
 
         <div class="card pd-20 pd-sm-40">
-          <h6 class="card-body-title">Add New Product</h6>
+          <h6 class="card-body-title">Add New Product
+
+            <a href="{{route('all.product')}}" class="btn btn-success btn-sm pull-right">All Products</a>
+          </h6>
           <p class="mg-b-20 mg-sm-b-30">New Product Form</p>
-             <form action="" method="post" enctype="multipart/form-data">
+             <form action="{{route('store.product')}}" method="post" enctype="multipart/form-data">
                 @csrf
                  <div class="form-layout"> 
                    <div class="row mg-b-25">
@@ -56,11 +59,7 @@
                        <div class="form-group mg-b-10-force">
                          <label for="cat" class="form-control-label">Sub Category: </label>
                          <select id="cat" class="form-control select2" data-placeholder="Choose Sub Category" name="subcategory_id">
-                           <option label="Choose country"></option>
-                           <option value="USA">United States of America</option>
-                           <option value="UK">United Kingdom</option>
-                           <option value="China">China</option>
-                           <option value="Japan">Japan</option>
+                        
                          </select>
                        </div>
                      </div><!-- col-4 -->
@@ -103,8 +102,8 @@
                      <div class="col-lg-12">
                        <div class="form-group">
                          <label class="form-control-label">Product Details: <span class="tx-danger">*</span></label>
-                         <input id="summernote" class="form-control"  name="product_details">
-                       </div>
+                         <textarea id="summernote" class="form-control" name="product_details"  cols="30" rows="10"></textarea>
+                       </div> 
                      </div><!-- col-4 -->
 
                      <div class="col-lg-12">
@@ -130,7 +129,7 @@
                        <div class="form-group">
                          <label for="provid" class="form-control-label" style="display: block;">Image Two : <span class="tx-danger">*</span></label>
                          <label class="custom-file">
-                            <input type="file" id="file1" class="custom-file-input" name="image_two" onchange="readURL2(this);">
+                            <input type="file" id="file1" class="custom-file-input" name="image_two" onchange="readURL2(this);" required="">
                             <span class="custom-file-control custom-file-control-primary"></span>
                             <br><br>
                             <img src="#" id="two">
@@ -142,7 +141,7 @@
                        <div class="form-group">
                          <label for="provid" class="form-control-label" style="display: block;">Image Three : <span class="tx-danger">*</span></label>
                          <label class="custom-file">
-                            <input type="file" id="file1" class="custom-file-input" name="image_two" onchange="readURL3(this);">
+                            <input type="file" id="file1" class="custom-file-input" name="image_three" onchange="readURL3(this);">
                             <span class="custom-file-control custom-file-control-primary"></span>
                             <br><br>
                             <img src="#" id="three">
@@ -203,7 +202,7 @@
                    <br><br>
        
                    <div class="form-layout-footer">
-                     <button class="btn btn-info mg-r-5">Submit Form</button>
+                     <button class="btn btn-info mg-r-5">Submit</button>
                      <button class="btn btn-secondary">Cancel</button>
                    </div><!-- form-layout-footer -->
                  </div><!-- form-layout -->       
