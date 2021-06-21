@@ -94,4 +94,60 @@ class ProductController extends Controller
                 return Redirect()->back()->with($notification);
             }
     }
+
+    public function deleteProduct($id)
+    {
+       $product = DB::table('products')->where('id', $id)->first();
+       $image_one = $product->image_one;  
+       $image_two = $product->image_two;  
+       $image_three = $product->image_three;
+       
+       unlink($image_one);
+       unlink($image_two);
+       unlink($image_three);
+        
+       DB::table('products')->where('id',$id)->delete();
+       $notification=array(
+        'messege'=>'Product Deleted Successfully',
+        'alert-type'=>'success'
+        );
+    return Redirect()->back()->with($notification);
+
+    }
+
+    public function activateProduct($id)
+    {
+        $product = DB::table('products')->where('id', $id)->update(['status'=>1]);
+     
+        $notification=array(
+        'messege'=>'Product activated Successfully',
+        'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+    public function inactiveProduct($id)
+    {
+        $product = DB::table('products')->where('id', $id)->update(['status'=>0]);
+        
+        $notification=array(
+        'messege'=>'Product Successfully inactive',
+        'alert-type'=>'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
+
+    public function viewProduct($id)
+    {
+        $product = DB::table('products')
+                    ->join('categories', 'products.category_id', 'categories.id')
+                    ->join('subcategories', 'products.subcategory_id', 'subcategories.id')
+                    ->join('brands', 'products.brand_id', 'brands.id')
+                    ->select('products.*', 'categories.category_name', 'brands.brand_name','subcategories.subcategory_name') 
+                    ->where('products.id', $id)->first();
+ 
+                    // return response()->json($product);
+        return view('admin.product.show', compact('product'));
+    }
 }
