@@ -82,13 +82,13 @@ class PostController extends Controller
         $update = DB::table('post_category')->where('id', $id)->update($data);
         if($update){
             $notification=array(
-                'messege'=>'Blog Category Deleted Successfully',
+                'messege'=>'Blog Category Updated Successfully',
                 'alert-type'=>'success'
                 );
         }else{
             $notification=array(
                 'messege'=>'Nothing Update',
-                'alert-type'=>'success'
+                'alert-type'=>'error'
                 );
         }
         return Redirect()->route('blog.categorylist')->with($notification);
