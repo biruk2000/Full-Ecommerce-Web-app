@@ -79,6 +79,21 @@ Route::get('inactive/product/{id}', 'Admin\Product\ProductController@inactivePro
 Route::get('view/product/{id}', 'Admin\Product\ProductController@viewProduct');
 
 
+// Blog admin All
+
+Route::get('blog/category/list', 'Admin\Post\PostController@blogCatList')->name('blog.categorylist');
+Route::post('admin/store/blog', 'Admin\Post\PostController@storeBlog')->name('store.blog.category');
+Route::get('edit/blog/category/{id}', 'Admin\Post\PostController@editBlogCat');
+Route::get('delete/blog/category/{id}', 'Admin\Post\PostController@deleteBlogCat');
+Route::post('update/blog/category/{id}', 'Admin\Post\PostController@updateBlogCat');
+
+Route::get('admin/posts', 'Admin\Post\PostController@displayPosts')->name('admin.posts');
+Route::get('admin/post/category', 'Admin\Post\PostController@displayCategory')->name('admin.postCategories');
+
+
+
+
+
 // Frontend All Routes
 
 Route::post('store/newsletter', 'FrontController@storeNewsletter')->name('store.newsletter');
