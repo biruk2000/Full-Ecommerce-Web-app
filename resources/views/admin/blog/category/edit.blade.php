@@ -4,7 +4,6 @@
 
     <!-- ########## START: MAIN PANEL ########## -->
     <div class="sl-mainpanel">
-     
      <div class="sl-pagebody">
        <div class="sl-page-title">
          <h5>Blog Category Update</h5>

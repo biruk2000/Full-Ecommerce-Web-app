@@ -87,12 +87,12 @@ Route::get('edit/blog/category/{id}', 'Admin\Post\PostController@editBlogCat');
 Route::get('delete/blog/category/{id}', 'Admin\Post\PostController@deleteBlogCat');
 Route::post('update/blog/category/{id}', 'Admin\Post\PostController@updateBlogCat');
 
-Route::get('admin/posts', 'Admin\Post\PostController@displayPosts')->name('admin.posts');
-Route::get('admin/post/category', 'Admin\Post\PostController@displayCategory')->name('admin.postCategories');
-
-
-
-
+Route::get('admin/add/posts', 'Admin\Post\PostController@createPost')->name('add.blogpost');
+Route::get('admin/posts', 'Admin\Post\PostController@displayBlogs')->name('all.blogpost');
+Route::post('admin/store/post', 'Admin\Post\PostController@storePost')->name('store.post');
+Route::get('delete/post/{id}', 'Admin\Post\PostController@deleteBlogPost');
+Route::get('edit/post/{id}', 'Admin\Post\PostController@editPost');
+Route::post('update/post/{id}', 'Admin\Post\PostController@updatePost');
 
 // Frontend All Routes
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
+use Image;
 
 class PostController extends Controller
 {
@@ -13,16 +14,6 @@ class PostController extends Controller
         $this->middleware('auth:admin');
     }
     
-    public function displayPosts()
-    {
-       
-    }
-
-    public function displayCategory()
-    {
-        
-    }
-
     public function blogCatList()
     {
         $blogcats = DB::table('post_category')->get();
@@ -93,5 +84,123 @@ class PostController extends Controller
         }
         return Redirect()->route('blog.categorylist')->with($notification);
     }
+
+    public function createPost()
+    {
+        $blogcats = DB::table('post_category')->get();
+        return view('admin.blog.post.create', compact('blogcats'));
+    }
+
+    public function displayBlogs()
+    {
+        $posts = DB::table('posts')
+                    ->join('post_category', 'posts.category_id','post_category.id')
+                    ->select('posts.*', 'post_category.category_name_en')
+                    ->get();
+                // return response()->json($posts);
+                return view('admin.blog.post.index', compact('posts'));
+    }
+
+    public function storePost(Request $request)
+    {
+         $data = array();
+         $data['post_title_en'] = $request->post_title_en;
+         $data['post_title_am'] = $request->post_title_am;
+         $data['category_id'] = $request->category_id;
+         $data['details_en'] = $request->details_en;
+         $data['details_am'] = $request->details_am;
+
+         $post_image = $request->file('post_image');
+
+         if($post_image){
+
+            $post_image_name = hexdec(uniqid()).'.'.$post_image->getClientOriginalExtension();
+            Image::make($post_image)->resize(400,200)->save('media/post/'.$post_image_name); 
+            
+            $data['post_image'] = 'media/post/'.$post_image_name;
+
+        
+            
+            DB::table('posts')->insert($data);
+   
+               $notification=array(
+                   'messege'=>'Post Added Successfully',
+                   'alert-type'=>'success'
+                   );
+               return Redirect()->route('all.blogpost')->with($notification);
+           }else{
+               $data['post_image'] = '';
+               DB::table('posts')->insert($data);
+   
+               $notification=array(
+                   'messege'=>'Post Added without Image',
+                   'alert-type'=>'success'
+                   );
+                   return Redirect()->route('all.blogpost')->with($notification);
+           }
+
+
+        }
+
+        public function deleteBlogPost($id)
+        {
+            $post = DB::table('posts')->where('id', $id)->first();
+             $post_image = $post->post_image;  
+                
+                unlink($post_image);
+                DB::table('posts')->where('id',$id)->delete();
+                $notification=array(
+                    'messege'=>'Post Deleted Successfully',
+                    'alert-type'=>'success'
+                    );
+                return Redirect()->back()->with($notification);
+
+        }
+        public function editPost($id)
+        {   
+
+            $post = DB::table('posts')->where('id', $id)->first();
+            $blogcats = DB::table('post_category')->get();
+                return view('admin.blog.post.edit', compact('post','blogcats'));
+        }
+
+        public function updatePost(Request $request, $id)
+        {
+            $oldImage = $request->old_image;
+
+            $data = array();
+            $data['post_title_en'] = $request->post_title_en;
+            $data['post_title_am'] = $request->post_title_am;
+            $data['category_id'] = $request->category_id;
+            $data['details_en'] = $request->details_en;
+            $data['details_am'] = $request->details_am;
+
+            $post_image = $request->file('post_image');
+
+            if($post_image){
+                unlink($oldImage);
+                $post_image_name = hexdec(uniqid()).'.'.$post_image->getClientOriginalExtension();
+                Image::make($post_image)->resize(400,200)->save('media/post/'.$post_image_name); 
+                
+                $data['post_image'] = 'media/post/'.$post_image_name;
+
+                DB::table('posts')->where('id', $id)->update($data);
+    
+                $notification=array(
+                    'messege'=>'Post Updated Successfully',
+                    'alert-type'=>'success'
+                    );
+                return Redirect()->route('all.blogpost')->with($notification);
+            }else{
+                $data['post_image'] = $oldImage;
+                DB::table('posts')->where('id', $id)->update($data);
+    
+                $notification=array(
+                    'messege'=>'Post Updated without Image',
+                    'alert-type'=>'success'
+                    );
+                    return Redirect()->route('all.blogpost')->with($notification);
+            }
+        }
 
 }
