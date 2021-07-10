@@ -4,6 +4,10 @@
 
 @include('layouts.menubar')
 
+@php 
+	$featured = DB::table('products')->where('status',1)->orderBy('id',)
+@endphp
+
 <div class="characteristics">
 		<div class="container">
 			<div class="row">
@@ -223,7 +227,7 @@
 							<div class="tabs">
 								<ul class="clearfix">
 									<li class="active">Featured</li>
-									<li>On Sale</li>
+									<li>Trend</li>
 									<li>Best Rated</li>
 								</ul>
 								<div class="tabs_line"><span></span></div>
