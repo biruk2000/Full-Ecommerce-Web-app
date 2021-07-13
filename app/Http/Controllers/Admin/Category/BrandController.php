@@ -88,6 +88,7 @@ class BrandController extends Controller
     $data['brand_name']=$request->brand_name;
     $image = $request->file('brand_logo');
     if($image) {
+        unlink($oldlogo);
         $image_name = date('dmy_H_s_i');
         $ext = strtolower($image->getClientOriginalExtension());
         $image_full_name = $image_name.'.'.$ext;
