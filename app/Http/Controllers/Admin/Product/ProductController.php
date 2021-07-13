@@ -50,6 +50,7 @@ class ProductController extends Controller
         $data['product_name'] = $request->product_name;
         $data['product_code'] = $request->product_code;
         $data['product_quantity'] = $request->product_quantity;
+        $data['discount_price'] = $request->discount_price;
         $data['product_size'] = $request->product_size;
         $data['product_color'] = $request->product_color;
         $data['selling_price'] = $request->selling_price;
