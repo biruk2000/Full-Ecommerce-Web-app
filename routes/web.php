@@ -4,7 +4,7 @@
 
 Route::get('/', function () {return view('pages.index');});
 //auth & user
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/password-change', 'HomeController@changePassword')->name('password.change');
 Route::post('/password-update', 'HomeController@updatePassword')->name('password.update');
@@ -99,3 +99,26 @@ Route::post('update/post/{id}', 'Admin\Post\PostController@updatePost');
 // Frontend All Routes
 
 Route::post('store/newsletter', 'FrontController@storeNewsletter')->name('store.newsletter');
+
+// Frontend All Routes
+
+Route::get('add/wishlist/{id}', 'WishlistController@addToWishlist');
+Route::get('add/to/cart/{id}', 'CartController@addToCart');
+Route::get('check', 'CartController@check');
+Route::get('product/details/{id}/{product_name}', 'ProductController@productView');
+Route::post('cart/product/add/{id}', 'ProductController@addCart');
+
+Route::get('product/cart', 'CartController@ShowCart')->name('show.cart');
+Route::get('remove/cart/{id}', 'CartController@removeCart');
+Route::post('update/cart/item', 'CartController@UpdateCart')->name('update.cartitem');
+Route::get('/cart/product/view/{id}', 'CartController@viewProduct');
+Route::post('insert/into/cart/', 'CartController@insertCart')->name('insert.into.cart');
+
+Route::get('user/checkout/', 'CartController@checkout')->name('user.checkout');
+Route::get('user/wishlist/', 'CartController@wishlist')->name('user.wishlist');
+Route::post('user/apply/coupon', 'CartController@coupon')->name('apply.coupon');
+Route::get('coupon/remove/', 'CartController@couponRemove')->name('coupon.remove');
+
+
+// product details
+Route::get('products/{id}', 'ProductController@productsView');

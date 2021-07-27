@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3c6a33f1749d8a1ff0dd8b196e2a4ebc033c278a',
+        'reference' => '22c96c3374ee082a9aa227df02871103ebce1414',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'bumbummen99/shoppingcart' => array(
+            'pretty_version' => '4.0.0',
+            'version' => '4.0.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bumbummen99/shoppingcart',
+            'aliases' => array(),
+            'reference' => 'f2c763e311b0fc58b2dfdfa2c41c6318a7c884e1',
+            'dev_requirement' => false,
+        ),
         'cordoval/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -340,13 +349,22 @@
             'reference' => 'a365bea7ff0dea9a50f5904be9e41656def9af4b',
             'dev_requirement' => false,
         ),
+        'laravel/helpers' => array(
+            'pretty_version' => 'v1.4.1',
+            'version' => '1.4.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel/helpers',
+            'aliases' => array(),
+            'reference' => 'febb10d8daaf86123825de2cb87f789a3371f0ac',
+            'dev_requirement' => false,
+        ),
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3c6a33f1749d8a1ff0dd8b196e2a4ebc033c278a',
+            'reference' => '22c96c3374ee082a9aa227df02871103ebce1414',
             'dev_requirement' => false,
         ),
         'laravel/tinker' => array(

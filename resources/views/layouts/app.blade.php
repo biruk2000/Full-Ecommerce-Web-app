@@ -16,6 +16,9 @@
 <link rel="stylesheet" type="text/css" href="{{asset('frontend/styles/responsive.css')}}">
 
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
+
+ <link rel="stylesheet" href="sweetalert2.min.css">
+
 </head>
 
 <body>
@@ -45,20 +48,23 @@
 											<li><a href="#">Japanese</a></li>
 										</ul>
 									</li>
-									<li>
-										<a href="#">$ US dollar<i class="fas fa-chevron-down"></i></a>
-										<ul>
-											<li><a href="#">EUR Euro</a></li>
-											<li><a href="#">GBP British Pound</a></li>
-											<li><a href="#">JPY Japanese Yen</a></li>
-										</ul>
-									</li>
 								</ul>
 							</div>
 							<div class="top_bar_user">
-								<div class="user_icon"><img src="{{asset('frontend/images/user.svg')}}" alt=""></div>
-								<div><a href="{{route('register')}}">Register</a></div>
-								<div><a href="{{route('login')}}">Sign in</a></div>
+								@guest
+								<div><a href="{{route('login')}}"> <div class="user_icon"><img src="{{asset('frontend/images/user.svg')}}" alt=""></div> Register/Login</a></div>
+								@else
+								<ul class="standard_dropdown top_bar_dropdown">
+									<li>
+										<a href="{{route('home')}}"> <div class="user_icon"><img src="{{asset('frontend/images/user.svg')}}" alt=""></div>Profile<i class="fas fa-chevron-down"></i></a>
+										<ul>
+											<li><a href="{{route('user.wishlist')}}">Wishlist</a></li>
+											<li><a href="{{route('user.checkout')}}">Checkout</a></li>
+											<li><a href="#">Others</a></li>
+										</ul>
+									</li>
+								</ul>
+								@endguest
 							</div>
 						</div>
 					</div>
@@ -111,23 +117,38 @@
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-								<div class="wishlist_icon"><img src="{{asset('frontend/images/heart.png')}}" alt=""></div>
+							
+							
+							@guest
+
+                            @else
+
+
+						@php
+						$wishlist = DB::table('wishlists')->where('user_id',Auth::id())->get();
+						@endphp
+
+
+
+								<div class="wishlist_icon"><img src="{{ asset('public/frontend/images/heart.png')}}" alt=""></div>
 								<div class="wishlist_content">
-									<div class="wishlist_text"><a href="#">Wishlist</a></div>
-									<div class="wishlist_count">115</div>
+									<div class="wishlist_text"><a href="{{route('user.wishlist')}}">Wishlist</a></div>
+									<div class="wishlist_count">{{ count($wishlist) }}</div>
 								</div>
 							</div>
+
+							@endguest
 
 							<!-- Cart -->
 							<div class="cart">
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="{{asset('frontend/images/cart.png')}}" alt="">
-										<div class="cart_count"><span>10</span></div>
+										<div class="cart_count"><span>{{Cart::count()}}</span></div>
 									</div>
 									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">$85</div>
+										<div class="cart_text"><a href="{{route('show.cart')}}">Cart</a></div>
+										<div class="cart_price">${{Cart::subtotal() }}</div>
 									</div>
 								</div>
 							</div>
@@ -262,9 +283,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script src="{{asset('frontend/js/custom.js')}}"></script>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
+<script src="{{ asset('frontend/js/product_custom.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="{{ asset('https://unpkg.com/sweetalert/dist/sweetalert.min.js')}}"></script>
-        
+
+
 
     <script>
         @if(Session::has('messege'))
