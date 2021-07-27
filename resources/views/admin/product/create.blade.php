@@ -204,6 +204,13 @@
                         <span>Hot New</span>
                       </label>
                     </div> <!-- col 4 -->
+
+                    <div class="col-lg-4">
+                      <label class="ckbox">
+                        <input type="checkbox" name="buyOne_getOne" value="1">
+                        <span>Buyone Getone</span>
+                      </label>
+                    </div> <!-- col 4 -->
                    </div>
 
                    <br><br>

@@ -31,7 +31,7 @@
 
 										@foreach($subcategories as $subcategory)
 											<li class="hassubs">
-												<a href="#">{{$subcategory->subcategory_name}}<i class="fas fa-chevron-right"></i></a>
+												<a href="{{'products/'.$subcategory->id}}">{{$subcategory->subcategory_name}}<i class="fas fa-chevron-right"></i></a>
 											</li>
 											@endforeach
 										</ul>
